@@ -19,26 +19,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  
-  // Webpack configuration to exclude test files
-  webpack: (config) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      'tap': false,
-      'why-is-node-running': false,
-      'desm': false,
-      'fastbench': false,
-      'pino-elasticsearch': false,
-    };
-    
-    // Ignore test files
-    config.module.rules.push({
-      test: /node_modules\/.*\/(test|bench)\//,
-      use: 'null-loader',
-    });
-    
-    return config;
-  },
-};
+};  
 
 export default nextConfig;
