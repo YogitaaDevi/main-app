@@ -5,11 +5,6 @@ export function middleware(request: NextRequest) {
   const authToken = request.cookies.get("auth_token");
   const { pathname } = request.nextUrl;
 
-  // Ignore Next.js internals and static assets
-  if (pathname.includes("/_next/") || pathname.includes("/favicon.ico")) {
-    return NextResponse.next();
-  }
-
   // Allow public access to /dashboard only
   if (pathname === "/dashboard") {
     return NextResponse.next();
