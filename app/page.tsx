@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
-      <div className="max-w-3xl space-y-8">
+      <div className="max-w-3xl space-y-8 mt-24">
         <h1 className="text-6xl md:text-7xl font-bold font-heading text-gradient tracking-tight">
           Next.js Zones
           <br />
