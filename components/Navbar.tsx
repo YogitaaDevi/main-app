@@ -38,8 +38,16 @@ export default function Navbar() {
   }, [authenticated, pathname]);
 
   const handleLogout = async () => {
+    // Logout from Privy
     await logout();
+    
+    // Clear server-side cookies
     await fetch("/api/auth/logout", { method: "POST" });
+    
+    // Clear localStorage (removes Privy refresh token)
+    localStorage.clear();
+    
+    // Redirect to login
     router.push("/login");
   };
 

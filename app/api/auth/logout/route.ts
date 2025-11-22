@@ -1,16 +1,11 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const response = NextResponse.json({ success: true });
-  
-  // Delete auth token
-  response.cookies.delete("auth_token");
-  
-  // Delete auth status
-  response.cookies.delete("auth_status");
-  
-  // Delete user info
-  response.cookies.delete("user_info");
-  
-  return response;
+  const cookieStore = await cookies();
+  cookieStore.delete("auth_token");
+  cookieStore.delete("auth_status");
+  cookieStore.delete("user_info");
+
+  return NextResponse.json({ success: true });
 }
