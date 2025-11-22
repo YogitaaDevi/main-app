@@ -38,11 +38,6 @@ function LoginContent() {
   // Temporarily render content even if not ready, to debug UI
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-gray-900">
-      <div className="mb-4 text-red-500 font-bold bg-white p-2 rounded">
-        Debug Status: Ready={String(ready)}, Auth={String(authenticated)}<br/>
-        Redirect To: {redirectTo || "None"}
-      </div>
-      
       <div className="glass-panel p-8 rounded-2xl max-w-md w-full text-center space-y-6 border border-white/20">
         <div className="h-16 w-16 bg-indigo-500/20 rounded-full flex items-center justify-center mx-auto text-indigo-400">
           <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
