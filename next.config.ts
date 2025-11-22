@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  
   // Asset prefix for production (optional - only if using CDN)
   assetPrefix: process.env.NEXT_PUBLIC_MAIN_ASSET_PREFIX,
   
@@ -17,6 +18,26 @@ const nextConfig: NextConfig = {
           : "http://localhost:3001/blog/:path*",
       },
     ];
+  },
+  
+  // Webpack configuration to exclude test files
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'tap': false,
+      'why-is-node-running': false,
+      'desm': false,
+      'fastbench': false,
+      'pino-elasticsearch': false,
+    };
+    
+    // Ignore test files
+    config.module.rules.push({
+      test: /node_modules\/.*\/(test|bench)\//,
+      use: 'null-loader',
+    });
+    
+    return config;
   },
 };
 
