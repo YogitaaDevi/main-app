@@ -17,9 +17,9 @@ export default function Home() {
           <Link href="/login" className="btn-primary text-lg">
             Get Started
           </Link>
-          <Link href="/blog" className="btn-secondary text-lg">
+          <a href="/blog" className="btn-secondary text-lg">
             View Blog
-          </Link>
+          </a>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 text-left">

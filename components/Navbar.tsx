@@ -100,9 +100,9 @@ export default function Navbar() {
                 Logout
               </button>
             ) : (
-              <Link href="/login" className="btn-primary text-sm">
+              <a href="#login" className="btn-primary text-sm">
                 Login
-              </Link>
+              </a>
             )}
           </div>
         </div>

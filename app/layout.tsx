@@ -3,6 +3,7 @@ import { inter, outfit } from "./fonts";
 import "./globals.css";
 import Providers from "./providers";
 import Navbar from "../components/Navbar";
+import LoginModal from "../components/LoginModal";
 
 export const metadata: Metadata = {
   title: "MicroZones App",
@@ -22,6 +23,7 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
+          <LoginModal />
           {children}
         </Providers>
       </body>
