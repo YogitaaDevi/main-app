@@ -6,6 +6,9 @@ export async function POST() {
   // Delete auth token
   response.cookies.delete("auth_token");
   
+  // Delete auth status
+  response.cookies.delete("auth_status");
+  
   // Delete user info
   response.cookies.delete("user_info");
   

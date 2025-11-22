@@ -8,9 +8,17 @@ export async function POST(request: Request) {
 
     const response = NextResponse.json({ success: true });
     
-    // Set auth token cookie
+    // Set auth token cookie (httpOnly for security)
     response.cookies.set("auth_token", "authenticated", {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+    });
+
+    // Set a client-readable cookie for auth status (non-httpOnly)
+    response.cookies.set("auth_status", "logged_in", {
+      httpOnly: false, // Client can read this
       secure: process.env.NODE_ENV === "production",
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 1 week

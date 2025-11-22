@@ -3,11 +3,39 @@
 import Link from "next/link";
 import { usePrivy } from "@privy-io/react-auth";
 import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const { authenticated, logout } = usePrivy();
   const router = useRouter();
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check both Privy auth state AND cookie
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      const hasCookie = Cookies.get('auth_status') === 'logged_in';
+      setIsLoggedIn(authenticated && hasCookie);
+    };
+
+    checkAuthStatus();
+
+    // Re-check when page becomes visible or focused
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        checkAuthStatus();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', checkAuthStatus);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', checkAuthStatus);
+    };
+  }, [authenticated, pathname]);
 
   const handleLogout = async () => {
     await logout();
@@ -56,7 +84,7 @@ export default function Navbar() {
             </div>
           </div>
           <div>
-            {authenticated ? (
+            {authenticated && isLoggedIn ? (
               <button
                 onClick={handleLogout}
                 className="btn-secondary text-sm"
