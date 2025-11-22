@@ -1,21 +1,16 @@
 "use client";
 
-import { PrivyProvider } from "@privy-io/react-auth";
+import dynamic from "next/dynamic";
+
+const PrivyClientProvider = dynamic(
+  () => import("./providers/PrivyClientProvider"),
+  { ssr: false }
+);
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  console.log("Providers: Rendering with App ID:", process.env.NEXT_PUBLIC_PRIVY_APP_ID ? "DEFINED" : "MISSING");
   return (
-    <PrivyProvider
-      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || "INSERT_PRIVY_APP_ID"}
-      config={{
-        loginMethods: ["email", "wallet"],
-        appearance: {
-          theme: "light",
-          accentColor: "#676FFF",
-        },
-      }}
-    >
+    <PrivyClientProvider>
       {children}
-    </PrivyProvider>
+    </PrivyClientProvider>
   );
 }
